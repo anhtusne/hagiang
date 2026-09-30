@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Hà Giang 4N3Đ • Lịch Trình Khám Phá Cực Bắc 2026</title>
+  <meta name="description"
+    content="Lịch trình Hà Giang 4 ngày 3 đêm (21/10 – 24/10/2026): Thư giãn, an toàn, ngắm cảnh, check-in chi tiết có Google Maps và ảnh minh họa từng điểm đến." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,600&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Ambient background glow -->
+  <div class="bg-mesh"></div>
+
+  <div class="app-container">
+    <!-- Top Bar -->
+    <header class="top-nav">
+      <div class="brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-mountain-sun"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title">HÀ GIANG LOOP</span>
+          <span class="brand-sub">21/10 – 24/10/2026 • 4N3Đ</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button id="themeToggleBtn" class="icon-btn" title="Đổi giao diện" aria-label="Đổi giao diện">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-card">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h1 class="hero-title">Hành Trình Khám Phá Cao Nguyên Đá</h1>
+
+        <!-- Quick Route Chip -->
+        <div class="route-summary">
+          <i class="fa-solid fa-route"></i>
+          <span>Hà Nội → Quản Bạ → Yên Minh → Đồng Văn → Lũng Cú → Mã Pì Lèng → Nho Quế → Pả Vi → Du Già → Hà
+            Giang</span>
+        </div>
+
+        <!-- Progress Widget in Hero -->
+        <div class="trip-progress-box">
+          <div class="progress-header">
+            <span class="progress-title">
+              <i class="fa-solid fa-map-pin"></i> Tiến độ check-in chuyến đi
+            </span>
+            <div class="progress-header-right">
+              <span class="progress-stats" id="progressStats">0/18 điểm (0%)</span>
+              <button id="btnResetProgress" class="btn-reset-icon" title="Đặt lại check-in về 0" aria-label="Đặt lại check-in">
+                <i class="fa-solid fa-rotate-left"></i>
+              </button>
+            </div>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressBarFill" style="width: 0%"></div>
+          </div>
+          <div class="progress-quote" id="progressStatusText">
+            Sẵn sàng nổ máy cho hành trình thanh xuân! 🛵
+          </div>
+        </div>
+
+        <!-- Hero Actions -->
+        <div class="hero-actions">
+          <a href="#day1" class="btn btn-primary" id="btnStartTrip">
+            <i class="fa-solid fa-compass"></i> Bắt Đầu Lịch Trình
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sticky Navigation Tabs -->
+    <nav class="sticky-tabs" id="stickyTabs">
+      <div class="tabs-scroll">
+        <button class="tab-item active" data-target="day1">
+          <span class="tab-day">Ngày 1</span>
+          <span class="tab-date">21/10 • Cổng Trời</span>
+        </button>
+        <button class="tab-item" data-target="day2">
+          <span class="tab-day">Ngày 2</span>
+          <span class="tab-date">22/10 • Lũng Cú</span>
+        </button>
+        <button class="tab-item" data-target="day3">
+          <span class="tab-day">Ngày 3</span>
+          <span class="tab-date">23/10 • Mã Pì Lèng</span>
+        </button>
+        <button class="tab-item" data-target="day4">
+          <span class="tab-day">Ngày 4</span>
+          <span class="tab-date">24/10 • Du Già</span>
+        </button>
+        <button class="tab-item" data-target="budget">
+          <span class="tab-day"><i class="fa-solid fa-coins"></i></span>
+          <span class="tab-date">Chi Phí</span>
+        </button>
+        <button class="tab-item" data-target="checklist">
+          <span class="tab-day"><i class="fa-solid fa-list-check"></i></span>
+          <span class="tab-date">Đồ Dùng</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Quick Stats Bar -->
+    <section class="quick-highlights">
+      <div class="stat-pill">
+        <i class="fa-regular fa-clock"></i>
+        <div>
+          <strong>4N3Đ</strong>
+          <small>Thời gian</small>
+        </div>
+      </div>
+      <div class="stat-pill">
+        <i class="fa-solid fa-bed"></i>
+        <div>
+          <strong>Đồng Văn (2Đ) • Pả Vi (1Đ)</strong>
+          <small>Điểm ngủ đêm</small>
+        </div>
+      </div>
+      <div class="stat-pill">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <div>
+          <strong>Sau 18:00</strong>
+          <small>Không chạy đèo</small>
+        </div>
+      </div>
+      <div class="stat-pill">
+        <i class="fa-solid fa-motorcycle"></i>
+        <div>
+          <strong>Xe Khách + Xe Máy</strong>
+          <small>Phương tiện</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CONTENT SECTIONS -->
+    <main class="main-sections">
+
+      <!-- ==================== DAY 1 ==================== -->
+      <section id="day1" class="day-section active-section">
+        <div class="day-header">
+          <div class="day-badge">NGÀY 1 • THỨ TƯ (21/10/2026)</div>
+          <h2 class="day-title">TP Hà Giang → Quản Bạ → Yên Minh → Sủng Là → Đồng Văn</h2>
+          <p class="day-desc">
+            <i class="fa-solid fa-flag-checkered"></i> Cung đường dài ~140km. Băng qua dốc Thẩm Mã hùng vĩ, ngắm núi đôi
+            Cô Tiên và nhận phòng tại thị trấn Đồng Văn trước 18:00.
+          </p>
+        </div>
+
+        <div class="timeline-wrapper" id="timeline-day1">
+          <!-- Item 1: Đến TP Hà Giang -->
+          <article class="spot-card" data-id="spot-d1-1">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 04:00 – 05:00</span>
+              <span class="spot-type-tag tag-rest"><i class="fa-solid fa-bed"></i> Nghỉ ngơi</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=900&q=80"
+                alt="TP Hà Giang sáng sớm" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-1" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Đến TP Hà Giang & Nghỉ Ngơi Tại Dorm</h3>
+              <p class="spot-info">
+                Xe giường nằm từ Hà Nội (khởi hành tối 20/10) đến TP Hà Giang vào rạng sáng. Về hostel/dorm nghỉ ngơi
+                vài tiếng, rửa mặt, sạc điện thoại, không cần vội chạy sớm.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Mẹo: Giữ ấm cổ và ngực, ngủ sâu 2-3 tiếng để có thể lực tốt nhất cho ngày đầu cầm lái.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Ben+xe+Ha+Giang" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 2: Cột mốc số 0 -->
+          <article class="spot-card" data-id="spot-d1-2">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 08:00</span>
+              <span class="spot-type-tag tag-checkin"><i class="fa-solid fa-camera"></i> Điểm xuất phát</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=900&q=80"
+                alt="Cột mốc số 0 Hà Giang" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-2" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Cột Mốc Số 0 Hà Giang (Km 0)</h3>
+              <p class="spot-info">
+                Sau khi ăn sáng bánh cuốn nóng và nhận xe máy (kiểm tra phanh, lốp, đèn, xăng đầy bình), nhóm ghé Km 0
+                chụp bức ảnh kỷ niệm đánh dấu điểm xuất phát hành trình.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Lưu ý: Chụp ảnh nhanh gọn, quan sát xe cộ quảng trường và buộc đồ đạc đằng sau thật chắc
+                  chắn.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Cot+moc+so+0+Ha+Giang" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 3: Cổng Trời Quản Bạ & Núi Đôi -->
+          <article class="spot-card" data-id="spot-d1-3">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 09:00 – 09:30</span>
+              <span class="spot-type-tag tag-view"><i class="fa-solid fa-eye"></i> Ngắm cảnh</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+                alt="Cổng trời Quản Bạ và Núi Đôi Cô Tiên" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-3" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Cổng Trời Quản Bạ & Núi Đôi Cô Tiên</h3>
+              <p class="spot-info">
+                Độ cao 1.500m so với mực nước biển. Từ đài quan sát cổng trời, bạn phóng tầm mắt ngắm trọn thung lũng
+                Tam Sơn thơ mộng và kiệt tác Núi Đôi Cô Tiên tròn trịa giữa lòng núi đá.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Gợi ý: Uống cafe ngắm mây bồng bềnh, chụp panorama thung lũng Tam Sơn.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Cong+troi+Quan+Ba" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 4: Cây Cô Đơn Cán Tỷ -->
+          <article class="spot-card" data-id="spot-d1-4">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 10:00 – 11:00</span>
+              <span class="spot-type-tag tag-photo"><i class="fa-solid fa-camera-retro"></i> Sống ảo</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1513836279014-a89f7a76ae86?auto=format&fit=crop&w=900&q=80"
+                alt="Cây cô đơn Cán Tỷ" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-4" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Cây Cô Đơn Cán Tỷ (Quản Bạ - Yên Minh)</h3>
+              <p class="spot-info">
+                Cây nghiến sừng sững cô độc bên vách núi đá vút cao trên cung đường mới xã Cán Tỷ. Khung cảnh một bên là
+                vách đá dựng đứng, một bên là vực sâu ngút ngàn.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Lưu ý an toàn: Đỗ xe sát lề vách núi, bật đèn báo hoặc quan sát kỹ gương cầu trước khi sang đường
+                  chụp ảnh.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Cay+co+don+Can+Ty+Quan+Ba" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 5: Rừng thông Yên Minh & Ăn trưa -->
+          <article class="spot-card" data-id="spot-d1-5">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 12:00 – 15:00</span>
+              <span class="spot-type-tag tag-food"><i class="fa-solid fa-utensils"></i> Ăn trưa & Ngắm cảnh</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80"
+                alt="Rừng thông Yên Minh" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-5" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Ăn Trưa & Rừng Thông Yên Minh (Đà Lạt miền Bắc)</h3>
+              <p class="spot-info">
+                Dừng chân dùng bữa trưa tại thị trấn Yên Minh (cơm bình dân thịt lợn bản, rau cải mèo xào). Sau đó lướt
+                nhẹ qua những rặng thông bạt ngàn mát rượi trải dọc sườn đồi.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Gợi ý: Nghỉ ngơi đủ 30-45 phút sau bữa trưa để lấy lại tinh thần trước khi vào cung đèo Thẩm
+                  Mã.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Rung+thong+Yen+Minh" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 6: Dốc Thẩm Mã + Dốc Chín Khoanh -->
+          <article class="spot-card" data-id="spot-d1-6">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 15:00 – 16:30</span>
+              <span class="spot-type-tag tag-drive"><i class="fa-solid fa-road"></i> Khúc cua huyền thoại</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80"
+                alt="Dốc Thẩm Mã Hà Giang" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-6" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Dốc Thẩm Mã & Dốc Chín Khoanh</h3>
+              <p class="spot-info">
+                Cung đường uốn lượn 9 khúc tay áo kinh điển – nơi ngày xưa dùng để thẩm định sức bền của ngựa thồ. Điểm
+                check-in biểu tượng với các em bé H'Mông đeo gùi hoa tam giác mạch.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Lưu ý: Về số 2 khi leo dốc, không rà phanh liên tục khi xuống dốc. Dừng xe ở bãi đỗ an toàn trên
+                  đỉnh dốc để chụp hình.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Doc+Tham+Ma" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 7: Sủng Là / Nhà của Pao -->
+          <article class="spot-card" data-id="spot-d1-7">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 16:30 – 17:30</span>
+              <span class="spot-type-tag tag-culture"><i class="fa-solid fa-house"></i> Văn hóa bản địa</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1583417319070-4a69db38a482?auto=format&fit=crop&w=900&q=80"
+                alt="Làng Sủng Là Nhà của Pao" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-7" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Thung Lũng Sủng Là & Nhà Của Pao</h3>
+              <p class="spot-info">
+                "Nơi đá nở hoa" đẹp như tranh với ngôi nhà tường trình bằng đất cổ kính của người H'Mông, bối cảnh bộ
+                phim nổi tiếng "Chuyện của Pao". Cánh đồng hoa tam giác mạch bao quanh tuyệt đẹp vào tháng 10.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Vé tham quan: ~10k/người. Nếu đến muộn sau 17:30 nên chạy thẳng về Đồng Văn để tránh trời
+                  tối.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Nha+cua+Pao+Sung+La" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 8: Phố cổ Đồng Văn -->
+          <article class="spot-card" data-id="spot-d1-8">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 18:00 – 21:30</span>
+              <span class="spot-type-tag tag-stay"><i class="fa-solid fa-moon"></i> Nghỉ đêm 1</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=900&q=80"
+                alt="Phố cổ Đồng Văn về đêm" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d1-8" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Nhận Phòng & Khám Phá Phố Cổ Đồng Văn</h3>
+              <p class="spot-info">
+                Về homestay/khách sạn tại thị trấn Đồng Văn nghỉ ngơi, tắm nước nóng. Tối đi bộ ăn lẩu gà đen / thắng
+                dền nóng hổi, uống cà phê Phố Cổ trong không gian đèn lồng ấm cúng.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-heart"></i>
+                <span>Ưu điểm: Ngủ 2 đêm liên tiếp tại Đồng Văn giúp không phải dọn vali mỗi ngày, tối đi bộ dạo chơi
+                  cực kỳ thư giãn.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Pho+co+Dong+Van" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================== DAY 2 ==================== -->
+      <section id="day2" class="day-section">
+        <div class="day-header">
+          <div class="day-badge">NGÀY 2 • THỨ NĂM (22/10/2026)</div>
+          <h2 class="day-title">Đồng Văn → Cột Cờ Lũng Cú → Làng Lô Lô Chải → Đồng Văn</h2>
+          <p class="day-desc">
+            <i class="fa-solid fa-flag"></i> Ngày thư thả nhất hành trình (~60km cả đi và về). Chạm tay vào lá cờ Tổ
+            quốc địa đầu 54m², nhâm nhi cafe cổ tích tại làng người Lô Lô Chải.
+          </p>
+        </div>
+
+        <div class="timeline-wrapper" id="timeline-day2">
+          <!-- Item 1: Phố cổ sáng -->
+          <article class="spot-card" data-id="spot-d2-1">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 07:00 – 08:30</span>
+              <span class="spot-type-tag tag-food"><i class="fa-solid fa-mug-hot"></i> Bữa sáng & Cafe</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=80"
+                alt="Cafe sáng phố cổ Đồng Văn" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d2-1" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Thưởng Thức Bánh Cuốn Tráng & Cafe Sáng Phố Cổ</h3>
+              <p class="spot-info">
+                Thức dậy trong không khí se lạnh cao nguyên. Thưởng thức bánh cuốn chan nước dùng xương nóng hổi kèm chả
+                thơm lừng, sau đó dạo ngắm những ngôi nhà mái ngói âm dương trăm năm tuổi.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Gợi ý: Chỉ cần mang túi xách nhỏ/balo nhẹ vì chiều sẽ quay lại homestay Đồng Văn ngủ đêm thứ
+                  2.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Banh+cuon+Ba+Ha+Dong+Van" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 2: Cột cờ Lũng Cú -->
+          <article class="spot-card" data-id="spot-d2-2">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 10:30 – 11:30</span>
+              <span class="spot-type-tag tag-checkin"><i class="fa-solid fa-flag"></i> Địa đầu Tổ quốc</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1508672019048-805b876b67e2?auto=format&fit=crop&w=900&q=80"
+                alt="Cột cờ Lũng Cú" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d2-2" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Cột Cờ Quốc Gia Lũng Cú (Đỉnh Núi Rồng)</h3>
+              <p class="spot-info">
+                Cực Bắc thiêng liêng của Tổ quốc với lá cờ đỏ sao vàng rộng 54m² đại diện cho 54 dân tộc anh em tung bay
+                kiêu hãnh. Từ trên đỉnh tháp ngắm nhìn hai hồ nước Mắt Rồng xanh ngắt.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-ticket"></i>
+                <span>Vé tham quan: ~40k/người + 5k xe điện/gửi xe. Có xe điện đưa lên chân bậc thang đá.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Cot+co+Lung+Cu" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 3: Lô Lô Chải -->
+          <article class="spot-card" data-id="spot-d2-3">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 12:00 – 14:00</span>
+              <span class="spot-type-tag tag-culture"><i class="fa-solid fa-tree"></i> Ngôi làng cổ tích</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=80"
+                alt="Làng Lô Lô Chải" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d2-3" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Làng Văn Hóa Lô Lô Chải & Cafe Cực Bắc</h3>
+              <p class="spot-info">
+                Ngôi làng xinh đẹp nép mình ngay dưới chân núi Rồng. Những bức tường đất vàng óng, hàng rào đá phủ rêu,
+                giàn ngô phơi gác bếp và những bộ trang phục thổ cẩm rực rỡ của người Lô Lô.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Trải nghiệm: Ăn trưa cơm lam gà nướng tại làng, ghé Cafe Cực Bắc thưởng thức ly cafe ấm và chụp
+                  ảnh góc tường rào đá.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Lang+Lo+Lo+Chai" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 4: Chiều thư giãn Đồng Văn -->
+          <article class="spot-card" data-id="spot-d2-4">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 15:30 – 21:00</span>
+              <span class="spot-type-tag tag-rest"><i class="fa-solid fa-spa"></i> Thư giãn & Hồi phục</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80"
+                alt="Đêm ấm cúng tại Đồng Văn" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d2-4" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Về Lại Đồng Văn: Tắm Lá Thuốc, Dạo Phố, Ăn Tối</h3>
+              <p class="spot-info">
+                Quay về homestay sớm, thong thả tắm lá thuốc người Dao ngâm bồn xua tan mỏi mệt, ngủ một giấc sảng
+                khoái. Tối thưởng thức lẩu bò nhúng giấm hạt dổi hoặc thịt trâu gác bếp.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-star"></i>
+                <span>Điểm cộng: Sạc đầy pin máy ảnh, điện thoại và chuẩn bị tinh thần cho ngày khám phá Mã Pì Lèng -
+                  Nho Quế ngày mai!</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Thi+tran+Dong+Van+Ha+Giang" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================== DAY 3 ==================== -->
+      <section id="day3" class="day-section">
+        <div class="day-header">
+          <div class="day-badge">NGÀY 3 • THỨ SÁU (23/10/2026)</div>
+          <h2 class="day-title">Đồng Văn → Đèo Mã Pì Lèng → Sông Nho Quế → Làng Pả Vi</h2>
+          <p class="day-desc">
+            <i class="fa-solid fa-water"></i> "Trái tim của chuyến đi"! Chinh phục đệ nhất hùng quan Mã Pì Lèng, đi
+            thuyền trên hẻm vực sâu nhất Đông Nam Á Tu Sản và nghỉ đêm tại Làng Pả Vi.
+          </p>
+        </div>
+
+        <div class="timeline-wrapper" id="timeline-day3">
+          <!-- Item 1: Đèo Mã Pì Lèng -->
+          <article class="spot-card" data-id="spot-d3-1">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 09:30 – 11:00</span>
+              <span class="spot-type-tag tag-drive"><i class="fa-solid fa-mountain"></i> Đệ nhất hùng quan</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=900&q=80"
+                alt="Đèo Mã Pì Lèng Hà Giang" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d3-1" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Chinh Phục Đèo Mã Pì Lèng (Đường Hạnh Phúc)</h3>
+              <p class="spot-info">
+                Một trong "Tứ Đại Đỉnh Đèo" Tây Bắc dài 20km nối liền Đồng Văn - Mèo Vạc. Vách đá vôi sừng sững chọc
+                trời, nhìn xuống đáy vực là dải lụa xanh biếc của dòng Nho Quế.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Gợi ý: Dừng tại Trạm dừng chân Mã Pì Lèng / Bảo tàng Con Đường Hạnh Phúc để chụp ảnh an toàn, ngắm
+                  toàn cảnh đèo.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Deo+Ma+Pi+Leng" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 2: Thuyền Nho Quế & Hẻm Tu Sản -->
+          <article class="spot-card" data-id="spot-d3-2">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 12:00 – 13:30</span>
+              <span class="spot-type-tag tag-photo"><i class="fa-solid fa-ship"></i> Trải nghiệm đắt giá</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80"
+                alt="Thuyền trên Sông Nho Quế và Hẻm Tu Sản" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d3-2" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Du Thuyền Sông Nho Quế & Hẻm Vực Tu Sản</h3>
+              <p class="spot-info">
+                Lướt êm đềm trên làn nước ngọc bích phẳng lặng giữa hai vách đá cao ngất ngưởng gần 1.000m. Cảm nhận sự
+                kỳ vĩ vô tận của thiên nhiên mà không máy ảnh nào tả xiết.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Đoạn đường dốc xuống bến thuyền Tà Làng khá dốc: Đi số 1-2 chậm rãi hoặc đi xe ôm người bản địa
+                  (~150k khứ hồi). Vé thuyền: ~120k/người.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Ben+thuyen+song+Nho+Que" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 3: Làng Pả Vi & Homestay Mèo Vạc -->
+          <article class="spot-card" data-id="spot-d3-3">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 15:30 – 21:30</span>
+              <span class="spot-type-tag tag-stay"><i class="fa-solid fa-house-chimney"></i> Nghỉ đêm 3</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=900&q=80"
+                alt="Làng văn hóa Pả Vi Mèo Vạc" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d3-3" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Làng Văn Hóa Du Lịch Cộng Đồng Pả Vi (Mèo Vạc)</h3>
+              <p class="spot-info">
+                Khu làng quy hoạch hình lục giác đậm chất kiến trúc nhà trình tường H'Mông cổ truyền, đường hoa sạch
+                đẹp, view thung lũng đá bao bọc cực kỳ yên bình.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-bed"></i>
+                <span>Gợi ý homestay: Ánh Trung (~750–850k), Pả Vi Homestay (~840–950k), Mèo Vạc Valley (~700–950k). Đặt
+                  tiệc nướng BBQ thịt lợn đen ngoài trời cực chill!</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Lang+van+hoa+Pa+Vi+Meo+Vac" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================== DAY 4 ==================== -->
+      <section id="day4" class="day-section">
+        <div class="day-header">
+          <div class="day-badge">NGÀY 4 • THỨ BẢY (24/10/2026)</div>
+          <h2 class="day-title">Mèo Vạc → Mậu Duệ → Du Già → Hà Giang → Hà Nội</h2>
+          <p class="day-desc">
+            <i class="fa-solid fa-road"></i> Hoàn thành cung vòng lặp huyền thoại (~150km). Khám phá đường đèo chữ M Mậu
+            Duệ, ngắm suối thác Du Già và về lại TP Hà Giang trước khi trời tối.
+          </p>
+        </div>
+
+        <div class="timeline-wrapper" id="timeline-day4">
+          <!-- Item 1: Cung đèo Mậu Duệ & Dốc chữ M -->
+          <article class="spot-card" data-id="spot-d4-1">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 08:30 – 10:30</span>
+              <span class="spot-type-tag tag-drive"><i class="fa-solid fa-shuffle"></i> Dốc chữ M kỳ thú</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"
+                alt="Cung đèo Mậu Duệ dốc chữ M" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d4-1" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Mèo Vạc → Mậu Duệ & Dốc Chữ M</h3>
+              <p class="spot-info">
+                Rời Pả Vi sau bữa sáng, đổ đèo hướng Mậu Duệ. Chiêm ngưỡng con đường mềm mại uốn lượn hình chữ M hoàn
+                hảo giữa sườn núi xanh mướt, một trong những góc ảnh độc đáo nhất Hà Giang.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <span>Lưu ý: Đoạn Mậu Duệ - Du Già có một số khúc cua gấp và sỏi dăm, luôn giữ tốc độ an toàn
+                  25-35km/h.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Doc+chu+M+Mau+Due" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 2: Thác & Bản Du Già -->
+          <article class="spot-card" data-id="spot-d4-2">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 12:30 – 15:30</span>
+              <span class="spot-type-tag tag-view"><i class="fa-solid fa-water"></i> Suối thác hoang sơ</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=900&q=80"
+                alt="Thác Du Già Hà Giang" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d4-2" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Bản Tiên Du Già & Thác Nước Du Già</h3>
+              <p class="spot-info">
+                Bản làng bình yên với những nếp nhà sàn của người Tày nép bên dòng suối trong vắt róc rách. Dừng chân ăn
+                trưa món cá suối nướng, ngắm thác nước mát rượi giữa thung lũng.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-regular fa-lightbulb"></i>
+                <span>Lưu ý thời gian: Xuất phát rời Du Già chậm nhất lúc 16:00 để về TP Hà Giang trước 18:00 khi trời
+                  tối.</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Thac+Du+Gia+Ha+Giang" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Item 3: Về TP Hà Giang & Lên xe về Hà Nội -->
+          <article class="spot-card" data-id="spot-d4-3">
+            <div class="spot-time">
+              <span class="time-badge"><i class="fa-solid fa-clock"></i> 18:00 – 22:00</span>
+              <span class="spot-type-tag tag-checkin"><i class="fa-solid fa-bus"></i> Hoàn thành chuyến đi</span>
+            </div>
+            <div class="spot-image-container">
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=900&q=80"
+                alt="Bến xe TP Hà Giang trở về Hà Nội" class="spot-img" loading="lazy" />
+              <button class="checkin-btn" data-spot="spot-d4-3" aria-label="Tích check-in điểm này">
+                <i class="fa-solid fa-check"></i>
+                <span class="checkin-text">Check-in</span>
+              </button>
+            </div>
+            <div class="spot-body">
+              <h3 class="spot-name">Về TP Hà Giang, Trả Xe & Lên Xe Khách Về Hà Nội</h3>
+              <p class="spot-info">
+                Về lại TP Hà Giang an toàn lúc ~18:00. Trả xe máy, nhận lại đồ gửi, tắm nước nóng tại hostel đối tác. Ăn
+                tối lẩu thắng cố hoặc cơm gia đình ấm cúng trước khi lên xe giường nằm lúc 21:00 về lại Hà Nội.
+              </p>
+              <div class="spot-tips">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Chúc mừng bạn đã hoàn thành trọn vẹn cung Hà Giang Loop an toàn và tràn ngập kỷ niệm đẹp!
+                  🎉</span>
+              </div>
+              <div class="spot-actions">
+                <a href="https://www.google.com/maps/search/?api=1&query=Ben+xe+Ha+Giang" target="_blank"
+                  rel="noopener noreferrer" class="map-btn">
+                  <i class="fa-solid fa-diamond-turn-right"></i> Chỉ Đường Google Maps
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================== BUDGET CALCULATOR ==================== -->
+      <section id="budget" class="day-section">
+        <div class="day-header">
+          <div class="day-badge">DỰ TOÁN CHI PHÍ</div>
+          <h2 class="day-title">Bảng Chi Phí Tham Khảo & Tính Toán Nhanh</h2>
+          <p class="day-desc">
+            Dự toán chi phí minh bạch được phân loại theo 3 nhóm: Chi phí cố định, Vé điểm đến và Chi phí sinh hoạt.
+          </p>
+        </div>
+
+        <div class="budget-calculator-card">
+          <div class="budget-table-responsive">
+            <table class="budget-table">
+              <thead>
+                <tr>
+                  <th>Hạng mục</th>
+                  <th>Mức giá tham khảo</th>
+                  <th>Ghi chú</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-header">
+                  <td colspan="3"><i class="fa-solid fa-ticket"></i> 1. Chi phí Di Chuyển & Cố Định</td>
+                </tr>
+                <tr>
+                  <td>Xe khách HN ↔ HG</td>
+                  <td><strong>700.000 – 1.000.000 đ</strong> / người</td>
+                  <td>Xe giường nằm / limousine khứ hồi (350–500k/lượt)</td>
+                </tr>
+                <tr>
+                  <td>Thuê xe máy (4 ngày)</td>
+                  <td><strong>720.000 – 880.000 đ</strong> / xe</td>
+                  <td>~180–220k/ngày (chia 2 người nếu xế ôm)</td>
+                </tr>
+                <tr>
+                  <td>Xăng xe máy (4 ngày)</td>
+                  <td><strong>~200.000 – 250.000 đ</strong> / xe</td>
+                  <td>Chạy ~400km toàn cung</td>
+                </tr>
+
+                <tr class="group-header">
+                  <td colspan="3"><i class="fa-solid fa-ticket-simple"></i> 2. Vé Tham Quan & Trải Nghiệm</td>
+                </tr>
+                <tr>
+                  <td>Cột cờ Lũng Cú</td>
+                  <td><strong>45.000 đ</strong> / người</td>
+                  <td>40k vé + 5k xe điện/gửi xe</td>
+                </tr>
+                <tr>
+                  <td>Thuyền Sông Nho Quế</td>
+                  <td><strong>125.000 đ</strong> / người</td>
+                  <td>120k vé thuyền + 5k gửi xe</td>
+                </tr>
+                <tr>
+                  <td>Nhà của Pao (Sủng Là)</td>
+                  <td><strong>10.000 đ</strong> / người</td>
+                  <td>Vé vào cổng tham quan</td>
+                </tr>
+                <tr>
+                  <td>Dốc Chín Khoanh / Thẩm Mã</td>
+                  <td><strong>25.000 đ</strong> / người</td>
+                  <td>Check-in / hoa / gửi xe nếu có</td>
+                </tr>
+                <tr>
+                  <td>Dinh Vua Mèo (Tùy chọn)</td>
+                  <td><strong>20.000 đ</strong> / người</td>
+                  <td>Nếu nhóm có nhu cầu ghé</td>
+                </tr>
+
+                <tr class="group-header">
+                  <td colspan="3"><i class="fa-solid fa-hotel"></i> 3. Lưu Trú & Ăn Uống (3 Đêm)</td>
+                </tr>
+                <tr>
+                  <td>Homestay Đồng Văn (2 đêm)</td>
+                  <td><strong>600.000 – 900.000 đ</strong> / người</td>
+                  <td>Phòng đôi / dorm đẹp ở phố cổ</td>
+                </tr>
+                <tr>
+                  <td>Homestay Làng Pả Vi (1 đêm)</td>
+                  <td><strong>350.000 – 500.000 đ</strong> / người</td>
+                  <td>Ánh Trung / Pả Vi / Mèo Vạc Valley (700-950k/phòng)</td>
+                </tr>
+                <tr>
+                  <td>Ăn uống & Cafe (4 ngày)</td>
+                  <td><strong>700.000 – 900.000 đ</strong> / người</td>
+                  <td>Bánh cuốn, lẩu gà đen, cơm bản, cafe check-in</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="budget-tips">
+            <i class="fa-solid fa-circle-info"></i>
+            <span><strong>Lời khuyên:</strong> Nên chuẩn bị thêm 500k quỹ dự phòng cho thuốc men, cafe bất chợt, mua đặc
+              sản tam giác mạch hoặc quà lưu niệm địa phương.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== CHECKLIST ==================== -->
+      <section id="checklist" class="day-section">
+        <div class="day-header">
+          <div class="day-badge">CHECKLIST HÀNH LÝ</div>
+          <h2 class="day-title">Danh Sách Đồ Dùng Cần Chuẩn Bị</h2>
+          <p class="day-desc">
+            Tích chọn đồ bạn đã chuẩn bị. Tiến độ sẽ tự động lưu lại trên điện thoại của bạn kể cả khi tắt mạng!
+          </p>
+        </div>
+
+        <div class="checklist-progress-box">
+          <div class="checklist-stat-header">
+            <span>Tiến độ chuẩn bị vali:</span>
+            <strong id="checklistRatio">0/10 món</strong>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill fill-accent" id="checklistBarFill" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <div class="checklist-grid" id="checklistContainer">
+          <!-- Will be rendered/hydrated via JS -->
+        </div>
+
+        <div class="add-custom-item">
+          <input type="text" id="customItemInput" placeholder="Thêm đồ dùng riêng của bạn..." />
+          <button class="btn btn-primary btn-sm" id="btnAddCustomItem">
+            <i class="fa-solid fa-plus"></i> Thêm
+          </button>
+        </div>
+
+        <div class="checklist-actions-bar">
+          <button id="btnRestoreChecklist" class="btn-text-action">
+            <i class="fa-solid fa-arrow-rotate-left"></i> Khôi phục danh sách mặc định
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Bottom Action Bar for Mobile -->
+    <div class="bottom-bar">
+      <div class="bottom-bar-content">
+        <button class="bottom-nav-btn active" data-target="day1">
+          <i class="fa-solid fa-calendar-day"></i>
+          <span>Lịch Trình</span>
+        </button>
+        <button class="bottom-nav-btn" data-target="budget">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Chi Phí</span>
+        </button>
+        <button class="bottom-nav-btn" data-target="checklist">
+          <i class="fa-solid fa-clipboard-check"></i>
+          <span>Hành Lý</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Image Preview Lightbox Modal -->
+    <div class="lightbox" id="imageLightbox">
+      <div class="lightbox-backdrop"></div>
+      <div class="lightbox-container">
+        <button class="lightbox-close">&times;</button>
+        <img src="" alt="" id="lightboxImg" />
+        <p id="lightboxCaption"></p>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
