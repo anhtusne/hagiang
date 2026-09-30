@@ -5,57 +5,55 @@
 
 // Default Checklist items from itinerary
 const DEFAULT_CHECKLIST = [
-  { id: 'c1', text: 'CCCD + Bằng lái xe máy (gốc & bản mềm)' },
-  { id: 'c2', text: 'Áo giữ nhiệt mỏng + Áo khoác gió ấm/chống nước' },
-  { id: 'c3', text: '2–3 bộ đồ chụp ảnh (ưu tiên màu nổi, gọn nhẹ)' },
-  { id: 'c4', text: 'Quần dài, giày thể thao có độ bám tốt' },
-  { id: 'c5', text: 'Áo mưa bộ cao cấp + Túi chống nước điện thoại' },
-  { id: 'c6', text: 'Sạc dự phòng (Powerbank) + Cáp sạc + Thẻ nhớ' },
-  { id: 'c7', text: 'Kính râm, kem chống nắng, son dưỡng môi chống nẻ' },
-  { id: 'c8', text: 'Thuốc cá nhân: Thuốc say xe, tiêu hóa, cảm sốt, urgo' },
-  { id: 'c9', text: 'Găng tay lái xe, khăn rằn quàng cổ giữ ấm' },
-  { id: 'c10', text: 'Balo/Túi duffel mềm dễ chằng dây xe máy (không dùng vali cứng)' }
+  { id: 'c1', text: 'CCCD + Bằng lái xe máy (gốc & bản mềm)', checked: false },
+  { id: 'c2', text: 'Áo giữ nhiệt mỏng + Áo khoác gió ấm/chống nước', checked: false },
+  { id: 'c3', text: '2–3 bộ đồ chụp ảnh (ưu tiên màu nổi, gọn nhẹ)', checked: false },
+  { id: 'c4', text: 'Quần dài, giày thể thao có độ bám tốt', checked: false },
+  { id: 'c5', text: 'Áo mưa bộ cao cấp + Túi chống nước điện thoại', checked: false },
+  { id: 'c6', text: 'Sạc dự phòng (Powerbank) + Cáp sạc + Thẻ nhớ', checked: false },
+  { id: 'c7', text: 'Kính râm, kem chống nắng, son dưỡng môi chống nẻ', checked: false },
+  { id: 'c8', text: 'Thuốc cá nhân: Thuốc say xe, tiêu hóa, cảm sốt, urgo', checked: false },
+  { id: 'c9', text: 'Găng tay lái xe, khăn rằn quàng cổ giữ ấm', checked: false },
+  { id: 'c10', text: 'Balo/Túi duffel mềm dễ chằng dây xe máy (không dùng vali cứng)', checked: false }
 ];
 
 // App State
 let state = {
   checkins: {}, // spotId: boolean
-  checklist: [], // array of objects
+  checklist: [], // array of objects { id, text, checked }
   numPeople: 2,
   theme: 'dark'
 };
 
 // DOM Elements
 const doc = document;
-const progressStats = doc.getElementById('progressStats');
-const progressBarFill = doc.getElementById('progressBarFill');
-const progressStatusText = doc.getElementById('progressStatusText');
-const themeToggleBtn = doc.getElementById('themeToggleBtn');
-const shareBtn = doc.getElementById('shareBtn');
-const tabItems = doc.querySelectorAll('.tab-item');
-const bottomNavBtns = doc.querySelectorAll('.bottom-nav-btn');
-const daySections = doc.querySelectorAll('.day-section');
-const checklistContainer = doc.getElementById('checklistContainer');
-const checklistRatio = doc.getElementById('checklistRatio');
-const checklistBarFill = doc.getElementById('checklistBarFill');
-const customItemInput = doc.getElementById('customItemInput');
-const btnAddCustomItem = doc.getElementById('btnAddCustomItem');
-const btnRestoreChecklist = doc.getElementById('btnRestoreChecklist');
-const numPeopleInput = doc.getElementById('numPeople');
-const incPeopleBtn = doc.getElementById('incPeople');
-const decPeopleBtn = doc.getElementById('decPeople');
-const costPerPerson = doc.getElementById('costPerPerson');
-const imageLightbox = doc.getElementById('imageLightbox');
-const lightboxImg = doc.getElementById('lightboxImg');
-const lightboxCaption = doc.getElementById('lightboxCaption');
-const btnResetData = doc.getElementById('btnResetData');
-const btnResetProgress = doc.getElementById('btnResetProgress');
-
-// Total spots across all 4 days
-const allSpotCards = doc.querySelectorAll('.spot-card');
+let progressStats;
+let progressBarFill;
+let progressStatusText;
+let themeToggleBtn;
+let tabItems;
+let bottomNavBtns;
+let daySections;
+let checklistContainer;
+let checklistRatio;
+let checklistBarFill;
+let customItemInput;
+let btnAddCustomItem;
+let btnRestoreChecklist;
+let numPeopleInput;
+let incPeopleBtn;
+let decPeopleBtn;
+let costPerPerson;
+let imageLightbox;
+let lightboxImg;
+let lightboxCaption;
+let btnResetData;
+let btnResetProgress;
+let toastContainer;
 
 // Initialization
 document.addEventListener('DOMContentLoaded', () => {
+  initDOMElements();
   loadStoredData();
   setupEventListeners();
   updateProgressUI();
@@ -64,19 +62,62 @@ document.addEventListener('DOMContentLoaded', () => {
   applyTheme(state.theme);
 });
 
+function initDOMElements() {
+  progressStats = doc.getElementById('progressStats');
+  progressBarFill = doc.getElementById('progressBarFill');
+  progressStatusText = doc.getElementById('progressStatusText');
+  themeToggleBtn = doc.getElementById('themeToggleBtn');
+  tabItems = doc.querySelectorAll('.tab-item');
+  bottomNavBtns = doc.querySelectorAll('.bottom-nav-btn');
+  daySections = doc.querySelectorAll('.day-section');
+  checklistContainer = doc.getElementById('checklistContainer');
+  checklistRatio = doc.getElementById('checklistRatio');
+  checklistBarFill = doc.getElementById('checklistBarFill');
+  customItemInput = doc.getElementById('customItemInput');
+  btnAddCustomItem = doc.getElementById('btnAddCustomItem');
+  btnRestoreChecklist = doc.getElementById('btnRestoreChecklist');
+  numPeopleInput = doc.getElementById('numPeople');
+  incPeopleBtn = doc.getElementById('incPeople');
+  decPeopleBtn = doc.getElementById('decPeople');
+  costPerPerson = doc.getElementById('costPerPerson');
+  imageLightbox = doc.getElementById('imageLightbox');
+  lightboxImg = doc.getElementById('lightboxImg');
+  lightboxCaption = doc.getElementById('lightboxCaption');
+  btnResetData = doc.getElementById('btnResetData');
+  btnResetProgress = doc.getElementById('btnResetProgress');
+  toastContainer = doc.getElementById('toastContainer');
+}
+
 // Load Data from LocalStorage
 function loadStoredData() {
   try {
     const savedCheckins = localStorage.getItem('hg_checkins_2026');
     if (savedCheckins) {
-      state.checkins = JSON.parse(savedCheckins);
+      const parsed = JSON.parse(savedCheckins);
+      if (typeof parsed === 'object' && parsed !== null) {
+        state.checkins = parsed;
+      }
     }
 
     const savedChecklist = localStorage.getItem('hg_checklist_2026');
     if (savedChecklist) {
-      state.checklist = JSON.parse(savedChecklist);
+      const parsedList = JSON.parse(savedChecklist);
+      if (Array.isArray(parsedList) && parsedList.length > 0) {
+        state.checklist = parsedList.map((item, idx) => {
+          if (typeof item === 'string') {
+            return { id: 'c_migrated_' + idx, text: item, checked: false };
+          }
+          return {
+            id: item.id || ('c_idx_' + idx + '_' + Date.now()),
+            text: item.text || item.title || item.name || '',
+            checked: Boolean(item.checked)
+          };
+        }).filter(item => item.text && item.text.trim().length > 0);
+      } else {
+        state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item }));
+      }
     } else {
-      state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item, checked: false }));
+      state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item }));
     }
 
     const savedTheme = localStorage.getItem('hg_theme_2026');
@@ -85,17 +126,20 @@ function loadStoredData() {
     }
 
     const savedPeople = localStorage.getItem('hg_people_2026');
-    if (savedPeople) {
+    if (savedPeople && numPeopleInput) {
       state.numPeople = parseInt(savedPeople, 10) || 2;
       numPeopleInput.value = state.numPeople;
     }
   } catch (e) {
     console.error('Error loading data from storage', e);
+    state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item }));
   }
 }
 
 // Setup Event Listeners
 function setupEventListeners() {
+  const allSpotCards = doc.querySelectorAll('.spot-card');
+
   // Check-in button clicks
   allSpotCards.forEach(card => {
     const spotId = card.getAttribute('data-id');
@@ -107,7 +151,8 @@ function setupEventListeners() {
     if (state.checkins[spotId]) {
       card.classList.add('checked-in');
       if (checkinBtn) {
-        checkinBtn.querySelector('.checkin-text').textContent = 'Đã check-in ✓';
+        const textSpan = checkinBtn.querySelector('.checkin-text');
+        if (textSpan) textSpan.textContent = 'Đã check-in ✓';
       }
     }
 
@@ -128,20 +173,24 @@ function setupEventListeners() {
   });
 
   // Top tabs click
-  tabItems.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-target');
-      switchTab(target);
+  if (tabItems) {
+    tabItems.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.getAttribute('data-target');
+        switchTab(target);
+      });
     });
-  });
+  }
 
   // Bottom navigation buttons
-  bottomNavBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-target');
-      switchTab(target);
+  if (bottomNavBtns) {
+    bottomNavBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-target');
+        switchTab(target);
+      });
     });
-  });
+  }
 
   // Start trip button
   const btnStartTrip = doc.getElementById('btnStartTrip');
@@ -149,56 +198,76 @@ function setupEventListeners() {
     btnStartTrip.addEventListener('click', (e) => {
       e.preventDefault();
       switchTab('day1');
-      window.scrollTo({ top: doc.getElementById('day1').offsetTop - 120, behavior: 'smooth' });
+      const d1 = doc.getElementById('day1');
+      if (d1) {
+        window.scrollTo({ top: d1.offsetTop - 120, behavior: 'smooth' });
+      }
     });
   }
 
   // Theme Toggle
-  themeToggleBtn.addEventListener('click', () => {
-    state.theme = state.theme === 'dark' ? 'light' : 'dark';
-    applyTheme(state.theme);
-    localStorage.setItem('hg_theme_2026', state.theme);
-  });
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+      applyTheme(state.theme);
+      localStorage.setItem('hg_theme_2026', state.theme);
+    });
+  }
 
   // Lightbox close
   doc.querySelectorAll('.lightbox-close, .lightbox-backdrop').forEach(el => {
-    el.addEventListener('click', () => imageLightbox.classList.remove('active'));
+    el.addEventListener('click', () => {
+      if (imageLightbox) imageLightbox.classList.remove('active');
+    });
   });
 
   // Budget counter handlers
-  incPeopleBtn.addEventListener('click', () => {
-    state.numPeople = Math.min(20, state.numPeople + 1);
-    numPeopleInput.value = state.numPeople;
-    updateBudgetUI();
-  });
+  if (incPeopleBtn && numPeopleInput) {
+    incPeopleBtn.addEventListener('click', () => {
+      state.numPeople = Math.min(20, state.numPeople + 1);
+      numPeopleInput.value = state.numPeople;
+      updateBudgetUI();
+    });
+  }
 
-  decPeopleBtn.addEventListener('click', () => {
-    state.numPeople = Math.max(1, state.numPeople - 1);
-    numPeopleInput.value = state.numPeople;
-    updateBudgetUI();
-  });
+  if (decPeopleBtn && numPeopleInput) {
+    decPeopleBtn.addEventListener('click', () => {
+      state.numPeople = Math.max(1, state.numPeople - 1);
+      numPeopleInput.value = state.numPeople;
+      updateBudgetUI();
+    });
+  }
 
-  numPeopleInput.addEventListener('change', () => {
-    let val = parseInt(numPeopleInput.value, 10);
-    if (isNaN(val) || val < 1) val = 1;
-    if (val > 20) val = 20;
-    state.numPeople = val;
-    numPeopleInput.value = val;
-    updateBudgetUI();
-  });
+  if (numPeopleInput) {
+    numPeopleInput.addEventListener('change', () => {
+      let val = parseInt(numPeopleInput.value, 10);
+      if (isNaN(val) || val < 1) val = 1;
+      if (val > 20) val = 20;
+      state.numPeople = val;
+      numPeopleInput.value = val;
+      updateBudgetUI();
+    });
+  }
 
-  // Checklist handlers
-  btnAddCustomItem.addEventListener('click', addCustomChecklistItem);
-  customItemInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') addCustomChecklistItem();
-  });
+  // Checklist input & buttons
+  if (btnAddCustomItem) {
+    btnAddCustomItem.addEventListener('click', addCustomChecklistItem);
+  }
+
+  if (customItemInput) {
+    customItemInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        addCustomChecklistItem();
+      }
+    });
+  }
 
   if (btnRestoreChecklist) {
     btnRestoreChecklist.addEventListener('click', restoreDefaultChecklist);
   }
 
   // Reset checkins progress
-  const btnResetProgress = doc.getElementById('btnResetProgress');
   if (btnResetProgress) {
     btnResetProgress.addEventListener('click', () => {
       if (confirm('Đặt lại tất cả các điểm check-in về 0?')) {
@@ -208,31 +277,39 @@ function setupEventListeners() {
         doc.querySelectorAll('.spot-card').forEach(card => {
           card.classList.remove('checked-in');
           const btn = card.querySelector('.checkin-btn');
-          if (btn) btn.querySelector('.checkin-text').textContent = 'Check-in';
+          if (btn) {
+            const span = btn.querySelector('.checkin-text');
+            if (span) span.textContent = 'Check-in';
+          }
         });
 
         updateProgressUI();
+        showToast('Đã đặt lại toàn bộ điểm check-in về 0', 'fa-rotate-left');
       }
     });
   }
 
-  // Reset all data if footer reset exists
+  // Reset all data
   if (btnResetData) {
     btnResetData.addEventListener('click', () => {
       if (confirm('Bạn có chắc chắn muốn đặt lại toàn bộ trạng thái check-in và danh sách hành lý không?')) {
         localStorage.removeItem('hg_checkins_2026');
         localStorage.removeItem('hg_checklist_2026');
         state.checkins = {};
-        state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item, checked: false }));
+        state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item }));
 
         doc.querySelectorAll('.spot-card').forEach(card => {
           card.classList.remove('checked-in');
           const btn = card.querySelector('.checkin-btn');
-          if (btn) btn.querySelector('.checkin-text').textContent = 'Check-in';
+          if (btn) {
+            const span = btn.querySelector('.checkin-text');
+            if (span) span.textContent = 'Check-in';
+          }
         });
 
         updateProgressUI();
         renderChecklist();
+        showToast('Đã khôi phục cài đặt gốc!', 'fa-arrows-rotate');
       }
     });
   }
@@ -241,17 +318,20 @@ function setupEventListeners() {
 // Toggle Check-in Logic
 function toggleCheckin(spotId, card, btn, spotName) {
   const isChecked = !!state.checkins[spotId];
+  const textSpan = btn.querySelector('.checkin-text');
+
   if (isChecked) {
     delete state.checkins[spotId];
     card.classList.remove('checked-in');
-    btn.querySelector('.checkin-text').textContent = 'Check-in';
+    if (textSpan) textSpan.textContent = 'Check-in';
   } else {
     state.checkins[spotId] = true;
     card.classList.add('checked-in');
-    btn.querySelector('.checkin-text').textContent = 'Đã check-in ✓';
+    if (textSpan) textSpan.textContent = 'Đã check-in ✓';
 
     // Confetti effect
     triggerConfetti();
+    showToast(`Đã check-in: ${spotName || 'Điểm đến'}`);
   }
 
   // Save to LocalStorage
@@ -263,8 +343,7 @@ function toggleCheckin(spotId, card, btn, spotName) {
 function updateProgressUI() {
   const allCards = doc.querySelectorAll('.spot-card');
   const total = allCards.length || 18;
-  
-  // Only count checkins that correspond to existing cards
+
   let checkedCount = 0;
   allCards.forEach(card => {
     const id = card.getAttribute('data-id');
@@ -304,23 +383,29 @@ function updateProgressUI() {
 // Tab Switching
 function switchTab(targetId) {
   // Update top sticky tabs
-  tabItems.forEach(tab => {
-    tab.classList.toggle('active', tab.getAttribute('data-target') === targetId);
-  });
+  if (tabItems) {
+    tabItems.forEach(tab => {
+      tab.classList.toggle('active', tab.getAttribute('data-target') === targetId);
+    });
+  }
 
   // Update bottom nav
-  bottomNavBtns.forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-target') === targetId);
-  });
+  if (bottomNavBtns) {
+    bottomNavBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-target') === targetId);
+    });
+  }
 
   // Toggle sections
-  daySections.forEach(sec => {
-    if (sec.id === targetId) {
-      sec.classList.add('active-section');
-    } else {
-      sec.classList.remove('active-section');
-    }
-  });
+  if (daySections) {
+    daySections.forEach(sec => {
+      if (sec.id === targetId) {
+        sec.classList.add('active-section');
+      } else {
+        sec.classList.remove('active-section');
+      }
+    });
+  }
 
   // Scroll smoothly to top of active section
   const targetSection = doc.getElementById(targetId);
@@ -340,107 +425,153 @@ function switchTab(targetId) {
 
 // Checklist Functions
 function renderChecklist() {
-  if (!checklistContainer) return;
-  checklistContainer.innerHTML = '';
+  const container = doc.getElementById('checklistContainer');
+  const ratioEl = doc.getElementById('checklistRatio');
+  const barEl = doc.getElementById('checklistBarFill');
+  if (!container) return;
 
+  container.innerHTML = '';
   let checkedCount = 0;
 
-  if (state.checklist.length === 0) {
-    checklistContainer.innerHTML = `
-      <div style="text-align:center; padding: 20px; color: var(--text-muted); font-size: 0.85rem;">
-        <i class="fa-regular fa-folder-open" style="font-size: 1.5rem; margin-bottom: 8px; display:block;"></i>
-        Chưa có đồ dùng nào trong danh sách. Hãy thêm món đồ hoặc nhấn Khôi phục bên dưới!
+  if (!state.checklist || state.checklist.length === 0) {
+    container.innerHTML = `
+      <div class="checklist-empty-state">
+        <i class="fa-regular fa-folder-open"></i>
+        <p>Chưa có món đồ nào trong danh sách hành lý.</p>
+        <button type="button" class="btn btn-primary btn-sm" id="btnEmptyRestore">
+          <i class="fa-solid fa-arrow-rotate-left"></i> Khôi phục danh sách chuẩn
+        </button>
       </div>
     `;
-    if (checklistRatio) checklistRatio.textContent = '0/0 món (0%)';
-    if (checklistBarFill) checklistBarFill.style.width = '0%';
+    const btnEmptyRestore = doc.getElementById('btnEmptyRestore');
+    if (btnEmptyRestore) {
+      btnEmptyRestore.addEventListener('click', restoreDefaultChecklist);
+    }
+    if (ratioEl) ratioEl.textContent = '0/0 món (0%)';
+    if (barEl) barEl.style.width = '0%';
     return;
   }
 
-  state.checklist.forEach((item, index) => {
+  state.checklist.forEach(item => {
     if (item.checked) checkedCount++;
 
-    const div = doc.createElement('div');
-    div.className = `checklist-item ${item.checked ? 'checked' : ''}`;
-    div.innerHTML = `
-      <div class="check-box">
+    const itemEl = doc.createElement('div');
+    itemEl.className = `checklist-item ${item.checked ? 'checked' : ''}`;
+    itemEl.setAttribute('data-id', item.id);
+    itemEl.innerHTML = `
+      <div class="check-box" aria-hidden="true">
         ${item.checked ? '<i class="fa-solid fa-check"></i>' : ''}
       </div>
-      <span class="item-text">${item.text}</span>
-      <button class="delete-item-btn" title="Xóa món này" aria-label="Xóa ${item.text}">
+      <span class="item-text">${escapeHtml(item.text)}</span>
+      <button type="button" class="delete-item-btn" title="Xóa món này" aria-label="Xóa ${escapeHtml(item.text)}">
         <i class="fa-solid fa-trash-can"></i>
       </button>
     `;
 
-    // Click item to toggle checked state
-    div.addEventListener('click', (e) => {
-      // If delete button clicked, ignore item toggle
+    // Click item row (checkbox or text) to toggle
+    itemEl.addEventListener('click', (e) => {
       if (e.target.closest('.delete-item-btn')) return;
-      item.checked = !item.checked;
-      localStorage.setItem('hg_checklist_2026', JSON.stringify(state.checklist));
-      renderChecklist();
+      toggleChecklistItem(item.id);
     });
 
-    // Delete button click
-    const delBtn = div.querySelector('.delete-item-btn');
+    // Delete item
+    const delBtn = itemEl.querySelector('.delete-item-btn');
     if (delBtn) {
       delBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        deleteChecklistItem(index);
+        deleteChecklistItem(item.id);
       });
     }
 
-    checklistContainer.appendChild(div);
+    container.appendChild(itemEl);
   });
 
   // Update stats
   const total = state.checklist.length;
   const pct = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
-  if (checklistRatio) checklistRatio.textContent = `${checkedCount}/${total} món (${pct}%)`;
-  if (checklistBarFill) checklistBarFill.style.width = `${pct}%`;
+  if (ratioEl) ratioEl.textContent = `${checkedCount}/${total} món (${pct}%)`;
+  if (barEl) barEl.style.width = `${pct}%`;
 }
 
-function deleteChecklistItem(index) {
-  const removed = state.checklist.splice(index, 1);
-  localStorage.setItem('hg_checklist_2026', JSON.stringify(state.checklist));
-  renderChecklist();
-}
-
-function restoreDefaultChecklist() {
-  if (confirm('Khôi phục danh sách đồ dùng chuẩn ban đầu?')) {
-    state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item, checked: false }));
+function toggleChecklistItem(id) {
+  const item = state.checklist.find(i => i.id === id);
+  if (item) {
+    item.checked = !item.checked;
     localStorage.setItem('hg_checklist_2026', JSON.stringify(state.checklist));
     renderChecklist();
   }
 }
 
-function addCustomChecklistItem() {
-  const text = customItemInput.value.trim();
-  if (!text) return;
+function deleteChecklistItem(id) {
+  const index = state.checklist.findIndex(item => item.id === id);
+  if (index !== -1) {
+    const [deleted] = state.checklist.splice(index, 1);
+    localStorage.setItem('hg_checklist_2026', JSON.stringify(state.checklist));
+    renderChecklist();
+    if (deleted) {
+      showToast(`Đã xóa: "${deleted.text}"`, 'fa-trash-can');
+    }
+  }
+}
 
-  state.checklist.push({
+function restoreDefaultChecklist() {
+  state.checklist = DEFAULT_CHECKLIST.map(item => ({ ...item, checked: false }));
+  localStorage.setItem('hg_checklist_2026', JSON.stringify(state.checklist));
+  renderChecklist();
+  showToast('Đã khôi phục danh sách đồ dùng mặc định!', 'fa-arrow-rotate-left');
+}
+
+function addCustomChecklistItem() {
+  const input = doc.getElementById('customItemInput');
+  if (!input) return;
+  const text = input.value.trim();
+  if (!text) {
+    input.focus();
+    return;
+  }
+
+  const newItem = {
     id: 'c_custom_' + Date.now(),
     text: text,
     checked: false
-  });
+  };
 
+  state.checklist.push(newItem);
   localStorage.setItem('hg_checklist_2026', JSON.stringify(state.checklist));
-  customItemInput.value = '';
+  input.value = '';
   renderChecklist();
+  showToast(`Đã thêm: "${text}"`, 'fa-plus');
+}
+
+// Escape HTML helper
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
+// Toast notification helper
+function showToast(message, icon = 'fa-check') {
+  const container = doc.getElementById('toastContainer');
+  if (!container) return;
+
+  const toast = doc.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `<i class="fa-solid ${icon}"></i><span>${message}</span>`;
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
 }
 
 // Budget Calculation
 function updateBudgetUI() {
   localStorage.setItem('hg_people_2026', state.numPeople);
-
-  // Base cost estimate per person:
-  // Xe khách khứ hồi: 850k
-  // Thuê xe máy (chia 2 nếu đi đôi): ~400k/người
-  // Xăng xe: ~110k/người
-  // Vé tham quan trọn bộ: ~200k/người
-  // Homestay 3 đêm: ~700k/người
-  // Ăn uống 4 ngày: ~800k/người
-  // Tổng cơ bản ~ 3.060.000 đ
 
   const estimatedCostPerPerson = 3050000;
   const formatted = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(estimatedCostPerPerson);
@@ -454,10 +585,10 @@ function updateBudgetUI() {
 function applyTheme(theme) {
   if (theme === 'light') {
     doc.documentElement.setAttribute('data-theme', 'light');
-    themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun" style="color:#f59e0b"></i>';
+    if (themeToggleBtn) themeToggleBtn.innerHTML = '<i class="fa-solid fa-sun" style="color:#f59e0b"></i>';
   } else {
     doc.documentElement.removeAttribute('data-theme');
-    themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+    if (themeToggleBtn) themeToggleBtn.innerHTML = '<i class="fa-solid fa-moon"></i>';
   }
 }
 

@@ -647,15 +647,13 @@ body {
   background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, var(--bg-card) 60%);
 }
 
-/* Redesigned Highly-Visible Spot Time Header */
+/* Highly-Visible Spot Time Header (Full Space, No Wrap) */
 .spot-time {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 10px 14px;
   background: linear-gradient(90deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.85) 100%);
   border-bottom: 1.5px solid rgba(255, 255, 255, 0.12);
-  gap: 10px;
 }
 
 [data-theme="light"] .spot-time {
@@ -664,7 +662,7 @@ body {
 }
 
 .time-badge {
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 800;
   color: #ffffff;
   background: linear-gradient(135deg, #0284c7, #2563eb);
@@ -677,70 +675,17 @@ body {
   letter-spacing: 0.3px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
 }
 
 .time-badge i {
   color: #fbbf24;
-  font-size: 1rem;
+  font-size: 0.95rem;
 }
 
 [data-theme="light"] .time-badge {
   background: linear-gradient(135deg, #0369a1, #1d4ed8);
   color: #ffffff;
-}
-
-.spot-type-tag {
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid transparent;
-}
-
-.tag-checkin {
-  background: rgba(56, 189, 248, 0.2);
-  color: #7dd3fc;
-  border-color: rgba(56, 189, 248, 0.3);
-}
-
-.tag-view {
-  background: rgba(16, 185, 129, 0.2);
-  color: #6ee7b7;
-  border-color: rgba(16, 185, 129, 0.3);
-}
-
-.tag-photo {
-  background: rgba(244, 63, 94, 0.2);
-  color: #fda4af;
-  border-color: rgba(244, 63, 94, 0.3);
-}
-
-.tag-food {
-  background: rgba(245, 158, 11, 0.2);
-  color: #fcd34d;
-  border-color: rgba(245, 158, 11, 0.3);
-}
-
-.tag-drive {
-  background: rgba(168, 85, 247, 0.2);
-  color: #d8b4fe;
-  border-color: rgba(168, 85, 247, 0.3);
-}
-
-.tag-culture {
-  background: rgba(234, 179, 8, 0.2);
-  color: #fef08a;
-  border-color: rgba(234, 179, 8, 0.3);
-}
-
-.tag-rest,
-.tag-stay {
-  background: rgba(99, 102, 241, 0.2);
-  color: #a5b4fc;
-  border-color: rgba(99, 102, 241, 0.3);
 }
 
 /* Spot Image & Floating Check-in Button */
@@ -1056,6 +1001,31 @@ body {
   gap: 8px;
 }
 
+.checklist-empty-state {
+  text-align: center;
+  padding: 24px 16px;
+  background: var(--bg-card);
+  border: 1.5px dashed var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.checklist-empty-state i {
+  font-size: 1.8rem;
+  color: var(--accent-blue);
+  opacity: 0.8;
+}
+
+.checklist-empty-state p {
+  font-size: 0.86rem;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
 .checklist-item {
   display: flex;
   align-items: center;
@@ -1066,10 +1036,17 @@ body {
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: all var(--transition-fast);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .checklist-item:hover {
   background: var(--bg-card-hover);
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+.checklist-item:active {
+  transform: scale(0.99);
 }
 
 .checklist-item.checked {
@@ -1083,22 +1060,24 @@ body {
 }
 
 .check-box {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
   border: 2px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   transition: all var(--transition-fast);
   flex-shrink: 0;
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .checklist-item.checked .check-box {
   background: var(--accent-green);
   border-color: var(--accent-green);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
 }
 
 .item-text {
@@ -1106,6 +1085,7 @@ body {
   color: var(--text-primary);
   flex: 1;
   line-height: 1.4;
+  word-break: break-word;
 }
 
 .delete-item-btn {
@@ -1113,7 +1093,7 @@ body {
   border: none;
   color: var(--text-muted);
   font-size: 0.95rem;
-  padding: 8px;
+  padding: 8px 10px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -1122,9 +1102,11 @@ body {
   justify-content: center;
   opacity: 0.65;
   flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .delete-item-btn:hover,
+.delete-item-btn:focus,
 .delete-item-btn:active {
   color: var(--accent-flower);
   background: rgba(244, 63, 94, 0.15);
@@ -1168,14 +1150,15 @@ body {
   background: none;
   border: none;
   color: var(--text-muted);
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 6px 12px;
+  padding: 8px 14px;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
+  font-weight: 600;
 }
 
 .btn-text-action:hover {
